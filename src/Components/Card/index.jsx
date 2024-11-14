@@ -6,9 +6,14 @@ function Card({data}){
 
   const context = useContext(ShoppingCartContext)
 
+  function showProduct(productDetail){
+    context.setProductToShow(productDetail)
+    context.openProductDetail()
+  }
+
   return(
     <div
-      onClick={()=> context.openProductDetail()} 
+      onClick={()=> showProduct(data)} 
       className="bg-white cursor-pointer w-56 h-60 rounded-lg"
     >
       <figure className="relative mb-3 w-full h-4/5">
