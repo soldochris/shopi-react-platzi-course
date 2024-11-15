@@ -11,9 +11,11 @@ function Card({data}){
     context.openProductDetail()
   }
 
-  function addProductsToCart(productData){
+  function addProductsToCart(event, productData){
+    event.stopPropagation()
     context.setCartProducts([...context.cartProducts, productData])
     context.setCount(context.count + 1)
+    context.openCheckoutSideMenu()
     console.log(context.cartProducts)
 
   }
@@ -34,7 +36,7 @@ function Card({data}){
         />
         <div 
           className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
-          onClick={() => addProductsToCart(data)}
+          onClick={(event) => addProductsToCart(event, data)}
         >
           <PlusIcon className="size-6 text-black"/>
         </div>
