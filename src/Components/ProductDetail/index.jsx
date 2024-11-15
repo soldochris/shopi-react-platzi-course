@@ -20,16 +20,16 @@ function ProductDetail(){
       </div>
       <figure className="pt-4 px-5">
           <img 
-            src={context.productToShow.images} 
+            src={context.productToShow.images ? context.productToShow.images[0]: ''} 
             alt={context.productToShow.title}
             className="w-full h-full rounded-lg" 
           />
         </figure>
         <p className="flex flex-col pt-4 px-5">
-          <div className="flex justify-between">
+          <span className="flex justify-between">
             <span className="font-medium text-md">{context.productToShow.title}</span>
             <span className="font-bold text-2xl">${context.productToShow.price}</span>
-          </div>
+          </span>
           <span className="pt-4 font-light text-sm">{context.productToShow.description}</span>
         </p>
     </aside>
