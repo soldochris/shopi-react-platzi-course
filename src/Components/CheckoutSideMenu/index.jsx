@@ -20,16 +20,18 @@ function CheckoutSideMenu() {
           className="size-5 cursor-pointer"
         />
       </div>
-      {
-        context.cartProducts.map( product => (
-          <OrderCard 
-            title={product.title}
-            imageUrl={product.images}
-            price={product.price}
-            key={product.id} 
-          />
-        ))
-      }
+      <div className="overflow-y-scroll">
+        {
+          context.cartProducts.map( product => (
+            <OrderCard 
+              title={product.title}
+              imageUrl={product.images}
+              price={product.price}
+              key={product.id} 
+            />
+          ))
+        }
+      </div>
     </aside>
   );
 }
