@@ -16,8 +16,6 @@ function Card({data}){
     context.setCartProducts([...context.cartProducts, productData])
     context.setCount(context.count + 1)
     context.openCheckoutSideMenu()
-    console.log(context.cartProducts)
-
   }
 
   function renderIcon(id){

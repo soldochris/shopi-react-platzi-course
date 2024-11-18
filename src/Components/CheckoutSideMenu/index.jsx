@@ -3,6 +3,7 @@ import { XMarkIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartContext } from "../../Context";
 import { OrderCard } from "../OrderCard";
 import { totalPrice } from "../../utils";
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 function CheckoutSideMenu() {
@@ -25,6 +26,7 @@ function CheckoutSideMenu() {
     context.setOrder([...context.order, orderToAdd])
     context.setCartProducts([])
     context.setCount(0)
+    context.closeCheckoutSideMenu()
   }
 
   return (
@@ -64,13 +66,15 @@ function CheckoutSideMenu() {
           </span>
         </p>
       </div>
-      <button 
-        className="flex bg-lime-500  m-5 px-3 py-2 rounded-lg justify-center items-center hover:text-white"
-        onClick={()=> handleCheckOut()}
-      >
-        Checkout 
-        <ShoppingBagIcon className="size-5 ml-1"/>
-      </button>
+      <Link to="/my-orders/last" className="m-5">
+        <button 
+          className="flex bg-lime-500 w-full rounded-lg justify-center items-center hover:text-white py-3"
+          onClick={()=> handleCheckOut()}
+        >
+          Checkout 
+          <ShoppingBagIcon className="size-5 ml-1"/>
+        </button>
+      </Link>
     </aside>
   );
 }
