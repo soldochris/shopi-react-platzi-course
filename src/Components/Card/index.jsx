@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { ShoppingCartContext } from "../../Context"
-import { PlusIcon } from '@heroicons/react/24/outline'
+import { PlusIcon,CheckIcon } from '@heroicons/react/24/outline'
 
 function Card({data}){
 
@@ -20,6 +20,30 @@ function Card({data}){
 
   }
 
+  function renderIcon(id){
+
+    const isInCart = context.cartProducts.filter(product => product.id === id).length > 0
+
+    if (isInCart){
+      return(
+        <div 
+          className="absolute top-0 right-0 flex justify-center items-center bg-gray-200 w-6 h-6 rounded-full m-2 p-1"
+        >
+          <CheckIcon className="size-6 text-green-700"/>
+        </div>
+      )
+    } else {
+      return(
+        <div 
+          className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
+          onClick={(event) => addProductsToCart(event, data)}
+        >
+          <PlusIcon className="size-6 text-black"/>
+        </div>
+      )
+    }
+
+  }
   return(
     <div
       onClick={()=> showProduct(data)} 
@@ -34,12 +58,7 @@ function Card({data}){
           src={data.images[0]}
           alt={data.title} 
         />
-        <div 
-          className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
-          onClick={(event) => addProductsToCart(event, data)}
-        >
-          <PlusIcon className="size-6 text-black"/>
-        </div>
+        {renderIcon(data.id)}
       </figure>
       <p className="flex justify-between">
         <span className="text-sm font-light">{data.title}</span>
