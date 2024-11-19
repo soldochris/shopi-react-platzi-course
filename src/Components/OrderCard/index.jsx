@@ -20,8 +20,8 @@ function OrderCard(props){
           onClick={() => handleDelete(id)}
         />
         }
-
       </div>
+      
     </div>
   )
 }

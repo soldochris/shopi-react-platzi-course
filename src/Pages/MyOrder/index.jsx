@@ -7,6 +7,11 @@ import { OrderCard } from "../../Components/OrderCard";
 
 function MyOrder() {
   const context = useContext(ShoppingCartContext);
+  const currentPath = window.location.pathname
+  let index = currentPath.substring(currentPath.lastIndexOf("/") + 1)
+  console.log(index)
+
+  if(index === 'last') index = context.order.length - 1
 
   return (
     <Layout>
@@ -17,15 +22,25 @@ function MyOrder() {
         <h1>My Order</h1>
       </div>
       <div className="overflow-y-scroll flex-1">
-        {context.order?.slice(-1)[0].products.map((product) => (
+        {context.order?.[index]?.products.map((product) => (
           <OrderCard
+            key={product.id}
             title={product.title}
             id={product.id}
             imageUrl={product.images}
             price={product.price}
-            key={product.id}
           />
         ))}
+      </div>
+      <div className="min-w-96 m-5 px-3 py-2 bg-slate-200 rounded-lg">
+        <p className="flex justify-between items-center">
+          <span>
+            Total: 
+          </span>
+          <span className="font-bold text-2xl">
+            ${context.order?.[index].totalPrice}
+          </span>
+        </p>
       </div>
     </Layout>
   );
