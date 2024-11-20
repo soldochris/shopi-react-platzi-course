@@ -33,6 +33,9 @@ function ShoppingCartProvider({children}){
     .then(data => setItems(data))
   }, [])
 
+  //Search by Title
+  const [searchByTitle, setSearchByTitle] = useState(null)
+  console.log(searchByTitle)
 
   return(
     <ShoppingCartContext.Provider value={{
@@ -52,7 +55,9 @@ function ShoppingCartProvider({children}){
       order,
       setOrder,
       items,
-      setItems
+      setItems,
+      searchByTitle,
+      setSearchByTitle
     }}>
       {children}
     </ShoppingCartContext.Provider>
