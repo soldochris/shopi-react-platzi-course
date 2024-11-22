@@ -4,9 +4,6 @@ const ShoppingCartContext = createContext()
 
 function ShoppingCartProvider({children}){
 
-  //Count of products in shopping Cart
-  const [count, setCount] = useState(0)
-
   //Open and Close Product Detail
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
   const openProductDetail = () => setIsProductDetailOpen(true)
@@ -74,12 +71,15 @@ function ShoppingCartProvider({children}){
     if (searchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, searchByTitle, searchByCategory))
     if (!searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, searchByTitle, searchByCategory))
     if (!searchByTitle && !searchByCategory) setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory))
+
+    return () => {
+      setSearchByTitle(null)
+    }
+    
   },[items, searchByCategory, searchByTitle])
 
   return(
     <ShoppingCartContext.Provider value={{
-      count,
-      setCount,
       isProductDetailOpen,
       openProductDetail,
       closeProductDetail,

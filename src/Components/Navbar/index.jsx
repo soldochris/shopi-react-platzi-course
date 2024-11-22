@@ -122,7 +122,7 @@ function Navbar(){
         <li className="flex">
           <ShoppingCartIcon className="size-5 text-black"/>
           <span>
-            {context.count}
+            {context.cartProducts.length}
           </span>
         </li>
       </ul>
