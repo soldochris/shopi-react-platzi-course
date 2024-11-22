@@ -3,29 +3,20 @@ import { ShoppingCartContext } from "../../Context"
 import { Layout } from "../../Components/Layout"
 import { Card } from "../../Components/Card"
 import { ProductDetail } from "../../Components/ProductDetail"
-import { FaceFrownIcon } from "@heroicons/react/24/outline"
 function Home(){
 
   const context = useContext(ShoppingCartContext)
 
   function renderView() {
-    if(context.searchByTitle?.length > 0) {
-      if(context.filteredItems?.length > 0){
-        return(
-          context.filteredItems?.map( (item) => (
-            <Card data={item} key={item.id}/>
-          ))
-        )
-      }else{
-        return (
-          <p>No product matches your search <FaceFrownIcon className="size-5"/></p>
-        )
-      }
-    } else{
+    if (context.filteredItems?.length > 0) {
       return (
-        context.items?.map( (item) => (
-          <Card data={item} key={item.id}/>
+        context.filteredItems?.map(item => (
+          <Card key={item.id} data={item} />
         ))
+      )
+    } else {
+      return (
+        <div>We do not have anything</div>
       )
     }
   }
