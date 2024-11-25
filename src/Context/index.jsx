@@ -2,7 +2,7 @@ import { createContext, useState, useEffect  } from "react"
 
 const ShoppingCartContext = createContext()
 
-function initializeLocalStorate(){
+function initializeLocalStorage(){
   const accountLocalStorage = localStorage.getItem('account')
   const loginLocalStorage = localStorage.getItem('login')
   let parsedAccount
@@ -141,4 +141,4 @@ function ShoppingCartProvider({children}){
   )
 }
 
-export {ShoppingCartProvider, ShoppingCartContext}
+export {ShoppingCartProvider, ShoppingCartContext, initializeLocalStorage}
