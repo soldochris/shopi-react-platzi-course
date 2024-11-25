@@ -1,18 +1,30 @@
 import { Layout } from "../../Components/Layout"
 import { Link } from "react-router-dom"
+import { useContext } from "react"
+import {ShoppingCartContext} from "../../Context"
 
 function SignIn(){
+  const context = useContext(ShoppingCartContext)
+
+  //Account
+  const account = localStorage.getItem('account')
+  const parsedAccount = JSON.stringify(account)
+  //has account
+  const noAccountInLocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
+  const noAccountInLocalState = context.account ? Object.keys(context.account).length === 0 : true
+  const hasUserAnAccount = !noAccountInLocalState || !noAccountInLocalStorage
+
   return(
     <Layout>
       <h1 className="font-medium text-xl text-center mb-6 w-80">Welcome</h1>
       <div className="flex flex-col w-80">
         <p>
           <span className="text-sm font-light">Email: </span>
-          <span>chris@inspired-code.com</span>
+          <span>{ parsedAccount?.email }</span>
         </p>
         <p>
           <span className="text-sm font-light">Password: </span>
-          <span>********</span>
+          <span>{ parsedAccount?.password }</span>
         </p>
         <Link
           to="/"
@@ -28,7 +40,10 @@ function SignIn(){
             Forgot my password
           </a>
         </div>
-        <button className="border border-black disabled:text-black/40 disabled:border-black/40 rounded-lg mt-6 py-3">
+        <button 
+          className="border border-black disabled:text-black/40 disabled:border-black/40 rounded-lg mt-6 py-3"
+          disabled={hasUserAnAccount}
+        >
           Sign Up
         </button>
       </div>
