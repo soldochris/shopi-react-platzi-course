@@ -2,7 +2,37 @@ import { createContext, useState, useEffect  } from "react"
 
 const ShoppingCartContext = createContext()
 
+function initializeLocalStorate(){
+  const accountLocalStorage = localStorage.getItem('account')
+  const loginLocalStorage = localStorage.getItem('login')
+  let parsedAccount
+  let parsedLogin
+
+  //verifying if there is an account in local storage
+  //otherwise setting an empty object for account
+  if(!accountLocalStorage){
+    localStorage.setItem('account', JSON.stringify({}))
+    parsedAccount = {}
+  } else {
+    parsedAccount = JSON.parse(accountLocalStorage)
+  }
+
+  //verifying if there is login value in local storage
+  //otherwise setting a false
+  if(!loginLocalStorage){
+    localStorage.setItem('login', JSON.stringify(false))
+    parsedLogin = false
+  } else {
+    parsedLogin = JSON.parse(loginLocalStorage)
+  }
+}
+
 function ShoppingCartProvider({children}){
+  //Account
+  const [account, setAccount] = useState({})
+
+  //Login
+  const [login, setLogin] = useState(false)
 
   //Open and Close Product Detail
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
@@ -100,7 +130,11 @@ function ShoppingCartProvider({children}){
       filteredItems,
       setFilteredItems,
       setSearchByCategory,
-      searchByCategory
+      searchByCategory,
+      account,
+      setAccount,
+      login,
+      setLogin
     }}>
       {children}
     </ShoppingCartContext.Provider>

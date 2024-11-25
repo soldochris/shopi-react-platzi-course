@@ -9,6 +9,12 @@ function Navbar(){
 
   const activeStyle = 'underline underline-offset-4'
 
+  function handleSignOut(){
+    const stringifiedLogin = JSON.stringify(false)
+    localStorage.setItem('login', stringifiedLogin)
+    context.setLogin(false)
+  }
+
   return(
     <nav className='flex justify-between items-center w-full fixed z-10 top-0 py-5 px-8 text-sm font-light bg-white'>
       <ul className="flex items-center gap-3">
@@ -115,8 +121,9 @@ function Navbar(){
             className={({isActive})=>
               isActive ? activeStyle: undefined
             }
+            onClick={()=>handleSignOut()}
           >
-            Sign In
+            Sign Out
           </NavLink>
         </li>
         <li className="flex">
