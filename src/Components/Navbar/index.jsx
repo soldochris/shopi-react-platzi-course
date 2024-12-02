@@ -8,9 +8,19 @@ function Navbar() {
 
   const activeStyle = "underline underline-offset-4";
 
+  //Login
   const login = localStorage.getItem("login");
   const parsedLogin = JSON.parse(login);
   const isUserLogged = context.login || parsedLogin;
+
+  //Account
+  const account = localStorage.getItem('account')
+  const parsedAccount = JSON.parse(account)
+
+  //Has an account?
+  const noAccountInLocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 :true
+  const noAccountInLocalState = context.account ? Object.keys(context.account).length === 0 : true
+  const hasUserAnAccount = !noAccountInLocalState || !noAccountInLocalStorage
 
   function handleSignOut() {
     const stringifiedLogin = JSON.stringify(false);
@@ -19,7 +29,7 @@ function Navbar() {
   }
 
   function renderView() {
-    if (!isUserLogged) {
+    if (hasUserAnAccount && !isUserLogged) {
       return (
         <li>
           <NavLink
@@ -69,7 +79,9 @@ function Navbar() {
     <nav className="flex justify-between items-center w-full fixed z-10 top-0 py-5 px-8 text-sm font-light bg-white">
       <ul className="flex items-center gap-3">
         <li className="font-semibold text-lg">
-          <NavLink to="/">Shopi</NavLink>
+          <NavLink to={`${isUserLogged ? '/' : 'sign-in'}`}>
+            Shopi
+          </NavLink>
         </li>
         <li>
           <NavLink
