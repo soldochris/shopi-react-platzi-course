@@ -44,7 +44,9 @@ function Navbar() {
     } else {
       return (
         <>
-          <li className="text-black/60">chris@inspired-code.com</li>
+          <li className="text-black/60">
+            {parsedAccount?.email}
+          </li>
           <li>
             <NavLink
               to="/my-orders"
